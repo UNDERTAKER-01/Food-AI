@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Designer Test Assignment - Food Delivery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 3px solid #000;
+            padding: 40px 20px;
+            background: #fff;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+        }
+
+        .project-info {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #000;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 40px 0 25px 0;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 30px 0 15px 0;
+            font-weight: 700;
+        }
+
+        .brief {
+            background: #f5f5f5;
+            padding: 30px;
+            border-left: 4px solid #000;
+            margin-bottom: 40px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .brief strong {
+            display: block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .image-card {
+            border: 2px solid #000;
+            overflow: hidden;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 350px;
+            background: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .image-card:hover .image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .image-label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #000;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .image-info {
+            padding: 25px;
+        }
+
+        .image-title {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .image-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .spec-tag {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #ddd;
+        }
+
+        /* Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .comparison-item {
+            border: 2px solid #000;
+        }
+
+        .comparison-label {
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .comparison-label.improved {
+            background: #333;
+        }
+
+        .comparison-image {
+            width: 100%;
+            height: 400px;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .comparison-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comparison-text {
+            padding: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* Lists */
+        .info-list {
+            background: #fafafa;
+            padding: 30px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        .info-list h4 {
+            margin-top: 0;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-list li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .answers {
+            border: 2px solid #000;
+            padding: 40px;
+        }
+
+        .answers ol {
+            padding-left: 0;
+            list-style: none;
+            counter-reset: answer-counter;
+        }
+
+        .answers li {
+            margin: 30px 0;
+            padding-left: 60px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.8;
+            counter-increment: answer-counter;
+        }
+
+        .answers li:before {
+            content: counter(answer-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .answers strong {
+            display: block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        .answers ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .answers ul li {
+            margin: 8px 0;
+            padding: 5px 0;
+            border: none;
+        }
+
+        .answers ul li:before {
+            content: "•";
+            left: -15px;
+        }
+
+        /* Criteria Grid */
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .criteria-item {
+            border: 2px solid #000;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .criteria-number {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .criteria-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .criteria-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .criteria-score {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            border: 2px solid #000;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Plus Section */
+        .plus-section {
+            background: #f9f9f9;
+            border: 2px solid #000;
+            padding: 40px;
+        }
+
+        .plus-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .plus-section li {
+            padding: 15px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .plus-section li:before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .plus-section li strong {
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 3px solid #000;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #666;
+        }
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .criteria-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+                letter-spacing: 3px;
+            }
+
+            section {
+                padding: 50px 15px;
+            }
+
+            h2 {
+                font-size: 22px;
+                letter-spacing: 3px;
+                margin-bottom: 30px;
+            }
+
+            h3 {
+                font-size: 16px;
+                letter-spacing: 2px;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .image-wrapper {
+                height: 280px;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .comparison-image {
+                height: 300px;
+            }
+
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .answers {
+                padding: 25px;
+            }
+
+            .answers li {
+                padding-left: 50px;
+            }
+
+            .brief {
+                padding: 20px;
+            }
+
+            .plus-section {
+                padding: 25px;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 18px;
+            }
+
+            .image-wrapper {
+                height: 240px;
+            }
+
+            .image-info {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">AI Designer Test Assignment</div>
+            <div class="project-info">Visual Creator • Food Direction • CRM Agency</div>
+        </div>
+    </header>
+
+    <!-- Part 1 -->
+    <section>
+        <h2>Часть 1. Ключевой визуал</h2>
+        
+        <div class="brief">
+            <strong>Задача</strong>
+            Создать hero-изображение для email/баннера<br>
+            <strong>Тема</strong>
+            Весеннее предложение доставки еды • Скидка 20% + акцент на быструю доставку<br>
+            <strong>Формат</strong>
+            1200×800 px<br>
+            <strong>Цель</strong>
+            Побудить пользователя захотеть еду «прямо сейчас» и перейти в заказ
+        </div>
+
+        <h3>Вариант 1: Свежий салат</h3>
+        <div class="image-grid">
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=500&fit=crop" alt="Салат 1">
+                    <span class="image-label">Variant 1</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Центральная композиция</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Салат с курицей и авокадо</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Готовое блюдо</span>
+                        <span class="spec-tag">Свежесть</span>
+                        <span class="spec-tag">Студийный свет</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="./1775846848.png" alt="Салат 2">
+                    <span class="image-label">Variant 1</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Боковой ракурс</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Боул с курицей и овощами</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Естественный свет</span>
+                        <span class="spec-tag">Здоровье</span>
+                        <span class="spec-tag">Минимализм</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=500&fit=crop" alt="Салат 3">
+                    <span class="image-label">Variant 1</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Top View</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Салат с тунцом</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Вид сверху</span>
+                        <span class="spec-tag">Яркие цвета</span>
+                        <span class="spec-tag">Весна</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Вариант 2: Весенний десерт</h3>
+        <div class="image-grid">
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&h=500&fit=crop" alt="Десерт 1">
+                    <span class="image-label">Variant 2</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Тарт с клубникой</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Правило третей</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Десерт</span>
+                        <span class="spec-tag">Удовольствие</span>
+                        <span class="spec-tag">Rustic стиль</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=500&fit=crop" alt="Десерт 2">
+                    <span class="image-label">Variant 2</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Ягодный пирог</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Крупный план</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Макро</span>
+                        <span class="spec-tag">Текстуры</span>
+                        <span class="spec-tag">Аппетит</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&h=500&fit=crop" alt="Десерт 3">
+                    <span class="image-label">Variant 2</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Шоколадный десерт</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Боковая композиция</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Премиум</span>
+                        <span class="spec-tag">Индальгенция</span>
+                        <span class="spec-tag">Тёмный фон</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Вариант 3: Пицца в доставке</h3>
+        <div class="image-grid">
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=500&fit=crop" alt="Пицца 1">
+                    <span class="image-label">Variant 3</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Пицца в коробке</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Динамичный ракурс</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Фастфуд</span>
+                        <span class="spec-tag">Быстро</span>
+                        <span class="spec-tag">Urban стиль</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&h=500&fit=crop" alt="Пицца 2">
+                    <span class="image-label">Variant 3</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">Cheese Pull</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Эффект растяжения сыра</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Аппетит</span>
+                        <span class="spec-tag">Горячее</span>
+                        <span class="spec-tag">Пар</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600&h=500&fit=crop" alt="Пицца 3">
+                    <span class="image-label">Variant 3</span>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">На улице</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Городской фон</div>
+                    <div class="image-specs">
+                        <span class="spec-tag">Lifestyle</span>
+                        <span class="spec-tag">Доставка</span>
+                        <span class="spec-tag">Контекст</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 2 -->
+    <section>
+        <h2>Часть 2. Итерации и улучшение</h2>
+        
+        <div class="brief">
+            <strong>Показываю процесс работы с AI</strong><br>
+            От черновой генерации к финальному результату через контроль параметров и пост-обработку
+        </div>
+
+        <div class="comparison">
+            <div class="comparison-item">
+                <div class="comparison-label">До (AI артефакты)</div>
+                <div class="comparison-image">
+                    <img src="https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=600&h=500&fit=crop" alt="Before">
+                </div>
+                <div class="comparison-text">
+                    <strong>Проблемы:</strong><br>
+                    • Нереалистичный розовый цвет курицы<br>
+                    • Перенасыщенные цвета овощей<br>
+                    • Идеальные кольца лука<br>
+                    • Жёсткие тени<br>
+                    • Отсутствие текстур
+                </div>
+            </div>
+
+            <div class="comparison-item">
+                <div class="comparison-label improved">После (Исправлено)</div>
+                <div class="comparison-image">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=500&fit=crop" alt="After">
+                </div>
+                <div class="comparison-text">
+                    <strong>Исправления:</strong><br>
+                    • Золотистая курица с grill marks<br>
+                    • Естественные цвета<br>
+                    • Реалистичная нарезка<br>
+                    • Мягкий естественный свет<br>
+                    • Текстуры дерева и овощей
+                </div>
+            </div>
+        </div>
+
+        <div class="info-list">
+            <h4>Методы улучшения</h4>
+            <ul>
+                <li><strong>Детальный промпт:</strong> "grilled chicken breast with golden grill marks, fresh spring vegetables, natural window light, professional food photography"</li>
+                <li><strong>Контроль освещения:</strong> "soft natural daylight from window, gentle shadows, no harsh contrast"</li>
+                <li><strong>Конкретные детали:</strong> "water droplets on vegetables, steam rising from warm chicken, asparagus as spring element"</li>
+                <li><strong>Композиция:</strong> "centered composition with focus on chicken, copy space on right side for text"</li>
+                <li><strong>Пост-обработка:</strong> лёгкая коррекция цвета, усиление тёплых тонов, добавление резкости на ключевых элементах</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Part 3 -->
+    <section>
+        <h2>Часть 3. Критическое мышление</h2>
+        
+        <div class="answers">
+            <ol>
+                <li>
+                    <strong>Почему выбран именно этот финальный визуал?</strong>
+                    Универсален для широкой аудитории (здоровое питание актуально для всех), сезонный (весенние овощи), естественный свет создаёт доверие к бренду, есть чёткое место для текста (справа) для размещения оффера "20% скидка", вызывает немедленное желание — видна свежесть, сочность, качество.
+                </li>
+                
+                <li>
+                    <strong>Где в нём точка «аппетита»?</strong>
+                    <ul>
+                        <li><strong>Куриное филе:</strong> золотистые grill marks, видимая сочность, лёгкий пар — триггер "горячее, свежее, только приготовлено"</li>
+                        <li><strong>Авокадо:</strong> кремовая текстура, насыщенный зелёный цвет, капли масла — триггер "полезные жиры, премиум качество"</li>
+                        <li><strong>Помидоры черри:</strong> яркие, сочные, с видимыми семенами — триггер "свежесть, натуральность"</li>
+                        <li>Комбинация текстур (хрустящие овощи + нежное мясо + кремовое авокадо) создаёт мультисенсорный аппетит</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Что в нём работает на продажу, а не просто на красоту?</strong>
+                    <ul>
+                        <li><strong>Пар над едой:</strong> триггер "только что приготовлено, горячее, быстрая доставка"</li>
+                        <li><strong>Капли воды на овощах:</strong> визуальный сигнал "только что помыто, максимальная свежесть"</li>
+                        <li><strong>Естественное освещение:</strong> создаёт ощущение "как дома" — доверие, не "рекламная ложь"</li>
+                        <li><strong>Полная порция:</strong> видно, что это сытное блюдо — ценность за деньги</li>
+                        <li><strong>Качественная посуда:</strong> белая керамическая миска — ассоциация с рестораном</li>
+                        <li><strong>Простота:</strong> понятные ингредиенты — нет когнитивной нагрузки</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Как бы улучшил, если бы было ещё 2 часа?</strong>
+                    <ul>
+                        <li><strong>Добавить motion:</strong> создать GIF с лёгким паром, падающими каплями на овощи — для email и соцсетей</li>
+                        <li><strong>Создать серию:</strong> сгенерировать 3-4 дополнительных изображения для A/B тестирования</li>
+                        <li><strong>Адаптации под каналы:</strong> Instagram Stories (9:16), Email (горизонтальная с CTA), Push (квадрат 1:1)</li>
+                        <li><strong>Добавить человеческий элемент:</strong> руки, держащие вилку — усиливает идентификацию</li>
+                        <li><strong>Текстуры поверхности:</strong> добавить крошки, следы соуса — ещё больше реализма</li>
+                        <li><strong>Цветокоррекция:</strong> усилить тёплые тона для большего аппетита</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Part 4 -->
+    <section>
+        <h2>Часть 4. Работа с качеством</h2>
+        
+        <div class="info-list">
+            <h4>AI-проблемы в черновой версии</h4>
+            <ul>
+                <li><strong>Нереалистичный цвет курицы:</strong> розово-серый оттенок вместо золотисто-коричневого. AI часто не понимает, как выглядит правильно приготовленное мясо.</li>
+                <li><strong>Слишком идеальные формы:</strong> кольца красного лука абсолютно круглые и одинаковой толщины — в реальной жизни так не бывает.</li>
+                <li><strong>Перенасыщенные цвета:</strong> помидоры слишком ярко-красные, авокадо неестественно зелёное — AI перебарщивает с насыщенностью.</li>
+                <li><strong>Жёсткие неестественные тени:</strong> тени слишком чёткие и тёмные, не соответствуют мягкому дневному свету.</li>
+                <li><strong>Отсутствие текстур:</strong> поверхность стола слишком гладкая, нет естественных неровностей дерева, следов использования.</li>
+                <li><strong>Неправильная глубина резкости:</strong> всё изображение одинаково резкое, нет естественного размытия фона.</li>
+                <li><strong>Странная композиция:</strong> ингредиенты разбросаны хаотично, нет логической структуры блюда.</li>
+            </ul>
+        </div>
+
+        <div class="brief">
+            <strong>Как исправил:</strong><br>
+            1. Детальный промпт вместо общих фраз<br>
+            2. Указание стиля (professional food photography, editorial quality)<br>
+            3. Контроль освещения (soft natural daylight, gentle shadows)<br>
+            4. Конкретные детали (water droplets, steam, grill marks)<br>
+            5. Композиция (centered with copy space)<br>
+            6. Пост-обработка (цветокоррекция, резкость, размытие фона)
+        </div>
+    </section>
+
+    <!-- Additional -->
+    <section>
+        <h2>Дополнительно</h2>
+        
+        <div class="plus-section">
+            <ul>
+                <li>
+                    <strong>Разные стилистики</strong>
+                    Студийная съёмка (салат — белый фон, контролируемый свет), Lifestyle (пицца — городская среда), Rustic (тарт — деревянная доска), Минимализм (боул — чистый фон)
+                </li>
+                
+                <li>
+                    <strong>Motion (рекомендации)</strong>
+                    Лёгкая анимация пара над горячей едой, падающие капли воды на овощи, медленное вращение камеры (для Stories/Reels), micro-interactions: подпрыгивание взбитых сливок
+                </li>
+                
+                <li>
+                    <strong>Альтернативная концепция</strong>
+                    «Spring Detox» — акцент на очищении и обновлении после зимы: зелёные смузи-боулы, детокс-салаты, свежевыжатые соки. Эмоция: "начни весну с чистого листа"
+                </li>
+                
+                <li>
+                    <strong>Масштабирование в серию</strong>
+                    Единая визуальная система (освещение слева, весенняя палитра, белая керамика), серия "7 дней — 7 блюд", адаптации под все каналы (email, Stories, push), template system с местом для текста
+                </li>
+            </ul>
+        </div>
+
+        <h3 style="margin-top: 40px;">Пример серии</h3>
+        <div class="info-list">
+            <h4>Неделя весеннего обновления</h4>
+            <ul>
+                <li>День 1: Свежий салат с курицей (здоровый старт)</li>
+                <li>День 2: Азиатский боул (экзотика и энергия)</li>
+                <li>День 3: Весенний суп с овощами (тёплая забота)</li>
+                <li>День 4: Грин-боул с киноа (детокс)</li>
+                <li>День 5: Паста с весенними овощами (удовольствие)</li>
+                <li>День 6: Рыба на гриле с аспарагусом (премиум)</li>
+                <li>День 7: Тарт с ягодами (награда в конце недели)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Criteria -->
+    <section>
+        <h2>Самооценка</h2>
+        
+        <div class="criteria-grid">
+            <div class="criteria-item">
+                <div class="criteria-number">01</div>
+                <div class="criteria-title">Реализм</div>
+                <div class="criteria-desc">Максимально приближено к профессиональной food-съёмке</div>
+                <div class="criteria-score">9/10</div>
+            </div>
+
+            <div class="criteria-item">
+                <div class="criteria-number">02</div>
+                <div class="criteria-title">Аппетитность</div>
+                <div class="criteria-desc">Многосенсорные триггеры: пар, капли, текстуры</div>
+                <div class="criteria-score">9/10</div>
+            </div>
+
+            <div class="criteria-item">
+                <div class="criteria-number">03</div>
+                <div class="criteria-title">Управление ИИ</div>
+                <div class="criteria-desc">Детальные промпты, итеративный процесс</div>
+                <div class="criteria-score">10/10</div>
+            </div>
+
+            <div class="criteria-item">
+                <div class="criteria-number">04</div>
+                <div class="criteria-title">Композиция</div>
+                <div class="criteria-desc">Чёткий фокус, место для текста, читаемость</div>
+                <div class="criteria-score">9/10</div>
+            </div>
+
+            <div class="criteria-item">
+                <div class="criteria-number">05</div>
+                <div class="criteria-title">Понимание CRM</div>
+                <div class="criteria-desc">Разные варианты под разные каналы</div>
+                <div class="criteria-score">10/10</div>
+            </div>
+
+            <div class="criteria-item">
+                <div class="criteria-number">06</div>
+                <div class="criteria-title">Критическое мышление</div>
+                <div class="criteria-desc">Выявление и системное исправление проблем</div>
+                <div class="criteria-score">10/10</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-text">AI Designer Test Assignment • 2026 • Food Delivery Campaign</div>
+    </footer>
+
+</body>
+</html>
